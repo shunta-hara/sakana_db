@@ -39,11 +39,11 @@ services:
       - mysql
     command: npm run start:dev
 
-  # frontend:
-  #   build: ./frontend
-  #   container_name: react_frontend
-  #   restart: always
-  #   ports:
-  #     - "8080:80"
-  #   depends_on:
-  #     - backend
+  frontend:
+    build: ./frontend
+    container_name: react_frontend
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
