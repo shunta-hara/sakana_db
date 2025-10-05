@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToMany,
+} from 'typeorm';
 import { Song } from './song.entity';
 
 @Entity('m_lyricist')
@@ -15,6 +22,6 @@ export class Lyricist {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  @OneToMany(() => Song, song => song.lyricist)
+  @OneToMany(() => Song, (song) => song.lyricist)
   songs: Song[];
 }

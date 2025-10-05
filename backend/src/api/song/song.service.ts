@@ -1,17 +1,26 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { GetListDto } from 'api/common/dto/getList.dto';
+import { Song } from 'entities/song.entity';
+import { SongRepository } from 'repositories/song.repository';
 
 @Injectable()
 export class SongService {
-  getSong(id: string) {
-    // 仮実装: 実際はDBから取得
-    return { id, title: 'Sample Song', artist: 'Sample Artist' };
+  constructor(
+    @InjectRepository(Song)
+    private readonly songRepository: SongRepository,
+  ) {}
+
+  async getSong(id: string): Promise<Song | undefined> {
+    // m_songテーブルからid一致レコードを取得
+    return this.songRepository.findOne({ where: { songId: Number(id) } });
   }
 
-  getAllSongs() {
-    // 仮実装: 実際はDBから取得
-    return [
-      { id: '1', title: 'Sample Song 1', artist: 'Artist 1' },
-      { id: '2', title: 'Sample Song 2', artist: 'Artist 2' },
-    ];
+  async getSongList(body: GetListDto): Promise<Song[]> {
+    return this.songRepository.find({
+      skip: body.offset,
+      take: body.limit,
+      order: { songId: 'ASC' },
+    });
   }
 }

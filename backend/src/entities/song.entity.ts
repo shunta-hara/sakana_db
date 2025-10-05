@@ -1,7 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { Composer } from './composer.entity';
 import { Lyricist } from './lyricist.entity';
-import { ReleaseSong } from './release-song.entity';
+import { ReleaseSong } from './releaseSong.entity';
 
 @Entity('m_song')
 export class Song {
@@ -14,10 +22,10 @@ export class Song {
   @Column({ name: 'duration' })
   duration: string;
 
-  @ManyToOne(() => Composer, composer => composer.songs)
+  @ManyToOne(() => Composer, (composer) => composer.songs)
   composer: Composer;
 
-  @ManyToOne(() => Lyricist, lyricist => lyricist.songs)
+  @ManyToOne(() => Lyricist, (lyricist) => lyricist.songs)
   lyricist: Lyricist;
 
   @CreateDateColumn({ name: 'created_at' })
@@ -26,6 +34,6 @@ export class Song {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  @OneToMany(() => ReleaseSong, rs => rs.song)
+  @OneToMany(() => ReleaseSong, (rs) => rs.song)
   releaseSongs: ReleaseSong[];
 }

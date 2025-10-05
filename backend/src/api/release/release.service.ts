@@ -1,17 +1,24 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { GetListDto } from 'api/common/dto/getList.dto';
+import { Release } from 'entities/release.entity';
+import { ReleaseRepository } from 'repositories/release.repository';
 
 @Injectable()
 export class ReleaseService {
+  constructor(
+    @InjectRepository(Release)
+    private readonly releaseRepository: ReleaseRepository,
+  ) {}
   getRelease(id: string) {
-    // 仮実装: 実際はDBから取得
-    return { id, title: 'Sample Release', date: '2025-01-01' };
+    return this.releaseRepository.findOne({ where: { releaseId: Number(id) } });
   }
 
-  getAllReleases() {
-    // 仮実装: 実際はDBから取得
-    return [
-      { id: '1', title: 'Sample Release 1', date: '2025-01-01' },
-      { id: '2', title: 'Sample Release 2', date: '2025-02-01' },
-    ];
+  getReleaseList(body: GetListDto) {
+    return this.releaseRepository.find({
+      skip: body.offset,
+      take: body.limit,
+      order: { releaseId: 'ASC' },
+    });
   }
 }

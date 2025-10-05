@@ -1,5 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common';
-import { ReleaseService } from './release.service';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { GetListDto } from 'api/common/dto/getList.dto';
+import { ReleaseService } from 'api/release/release.service';
 
 @Controller('releases')
 export class ReleaseController {
@@ -10,8 +11,8 @@ export class ReleaseController {
     return this.releaseService.getRelease(id);
   }
 
-  @Get()
-  getAllReleases() {
-    return this.releaseService.getAllReleases();
+  @Post('list')
+  getReleaseList(@Body() body: GetListDto) {
+    return this.releaseService.getReleaseList(body);
   }
 }

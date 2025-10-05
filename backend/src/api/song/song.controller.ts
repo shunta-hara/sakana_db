@@ -1,5 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common';
-import { SongService } from './song.service';
+import { Controller, Get, Post, Param, Body } from '@nestjs/common';
+import { GetListDto } from 'api/common/dto/getList.dto';
+import { SongService } from 'api/song/song.service';
 
 @Controller('songs')
 export class SongController {
@@ -10,8 +11,8 @@ export class SongController {
     return this.songService.getSong(id);
   }
 
-  @Get()
-  getAllSongs() {
-    return this.songService.getAllSongs();
+  @Post('list')
+  getSongList(@Body() body: GetListDto) {
+    return this.songService.getSongList(body);
   }
 }

@@ -13,9 +13,9 @@ export class ReleaseSong {
   @Column({ name: 'order', default: 1 })
   order: number;
 
-  @ManyToOne(() => Release, release => release.releaseSongs)
+  @ManyToOne(() => Release, (release) => release.releaseSongs)
   release: Release;
 
-  @ManyToOne(() => Song, song => song.releaseSongs)
+  @ManyToOne(() => Song, (song) => song.releaseSongs)
   song: Song;
 }
