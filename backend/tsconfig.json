@@ -9,9 +9,12 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
-    "ignoreDeprecations": "6.0"
+    "paths": {
+      "api/*": ["./src/api/*"],
+      "entities/*": ["./src/entities/*"],
+      "repositories/*": ["./src/repositories/*"]
+    },
+    "incremental": true
   },
   "exclude": ["node_modules", "dist"]
 }
