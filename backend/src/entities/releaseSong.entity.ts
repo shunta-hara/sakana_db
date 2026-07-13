@@ -1,9 +1,10 @@
 import { Entity, PrimaryColumn, Column, ManyToOne } from 'typeorm';
 import { Release } from './release.entity';
 import { Song } from './song.entity';
+import { BaseEntity } from 'entities/base.entity';
 
 @Entity('mid_release_song')
-export class ReleaseSong {
+export class ReleaseSong extends BaseEntity {
   @PrimaryColumn({ name: 'release_id' })
   releaseId: number;
 

@@ -6,10 +6,11 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from 'typeorm';
-import { Song } from './song.entity';
+import { Song } from 'entities/song.entity';
+import { BaseEntity } from 'entities/base.entity';
 
 @Entity('m_composer')
-export class Composer {
+export class Composer extends BaseEntity {
   @PrimaryGeneratedColumn({ name: 'composer_id' })
   composerId: number;
 

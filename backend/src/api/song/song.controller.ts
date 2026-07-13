@@ -1,10 +1,13 @@
 import { Controller, Get, Post, Param, Body } from '@nestjs/common';
 import { GetListDto } from 'api/common/dto/getList.dto';
 import { SongService } from 'api/song/song.service';
+import { BaseController } from 'api/common/base/base.controller';
 
 @Controller('songs')
-export class SongController {
-  constructor(private readonly songService: SongService) {}
+export class SongController extends BaseController {
+  constructor(private readonly songService: SongService) {
+    super();
+  }
 
   @Get(':id')
   getSong(@Param('id') id: string) {
@@ -13,6 +16,6 @@ export class SongController {
 
   @Post('list')
   getSongList(@Body() body: GetListDto) {
-    return this.songService.getSongList(body);
+    return this.handleList(this.songService.getSongList(body), body.limit, body.offset);
   }
 }

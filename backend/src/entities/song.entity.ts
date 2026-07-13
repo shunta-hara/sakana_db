@@ -10,9 +10,10 @@ import {
 import { Composer } from './composer.entity';
 import { Lyricist } from './lyricist.entity';
 import { ReleaseSong } from './releaseSong.entity';
+import { BaseEntity } from 'entities/base.entity';
 
 @Entity('m_song')
-export class Song {
+export class Song extends BaseEntity {
   @PrimaryGeneratedColumn({ name: 'song_id' })
   songId: number;
 
@@ -27,12 +28,6 @@ export class Song {
 
   @ManyToOne(() => Lyricist, (lyricist) => lyricist.songs)
   lyricist: Lyricist;
-
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
-
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
 
   @OneToMany(() => ReleaseSong, (rs) => rs.song)
   releaseSongs: ReleaseSong[];

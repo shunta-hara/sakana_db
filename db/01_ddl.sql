@@ -45,6 +45,8 @@ CREATE TABLE mid_release_song (
     release_id INT,
     song_id INT,
     `order` INT DEFAULT 1,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (release_id, song_id),
     FOREIGN KEY (release_id) REFERENCES m_release(release_id),
     FOREIGN KEY (song_id) REFERENCES m_song(song_id)

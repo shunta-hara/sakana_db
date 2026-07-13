@@ -2,14 +2,13 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
-  UpdateDateColumn,
   OneToMany,
 } from 'typeorm';
-import { ReleaseSong } from './releaseSong.entity';
+import { ReleaseSong } from 'entities/releaseSong.entity';
+import { BaseEntity } from 'entities/base.entity';
 
 @Entity('m_release')
-export class Release {
+export class Release extends BaseEntity {
   @PrimaryGeneratedColumn({ name: 'release_id' })
   releaseId: number;
 
@@ -18,12 +17,6 @@ export class Release {
 
   @Column({ name: 'release_date', type: 'date', nullable: true })
   releaseDate: string;
-
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
-
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
 
   @OneToMany(() => ReleaseSong, (rs) => rs.release)
   releaseSongs: ReleaseSong[];
